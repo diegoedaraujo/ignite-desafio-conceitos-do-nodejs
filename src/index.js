@@ -29,7 +29,7 @@ app.post("/users", (request, response) => {
   const userExists = users.find((user) => user.username === username);
 
   if (userExists) {
-    return response.status(400).json({ error: "Username already exists" });
+    return response.status(400).json({ error: "User already exists" });
   }
   const user = {
     id: uuidv4(),
@@ -99,7 +99,7 @@ app.delete("/todos/:id", checksExistsUserAccount, (request, response) => {
 
   const todoIndex = user.todos.findIndex((todo) => todo.id === id);
 
-  if (!todoIndex === -1) {
+  if (todoIndex === -1) {
     return response.status(404).json({ error: "Todo not found" });
   }
 
